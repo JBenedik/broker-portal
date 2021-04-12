@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import React,  { useState }  from 'react'
+import { Link, Switch, Route, Redirect } from 'react-router-dom'
+import logo from './kind_logo.png';
+import Broker from './components/broker'
+import Client from './components/client'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import theme from './theme';
+import { ThemeProvider} from '@material-ui/core/styles';
 import './App.css';
 
+
+
 function App() {
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const handleChange = (_e, newCurrentTab) => {
+    setCurrentTab(newCurrentTab);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <img src={logo} alt="logo" className="logo" />
+      <Tabs
+        value={currentTab}
+        indicatorColor="primary"
+        textColor="secondary"
+        onChange={handleChange}
+        centered
+      >
+        <Tab label="Client referrals" component={Link} to="/client" />
+        <Tab label="Broker/Agent referrals" component={Link} to="/broker" />
+      </Tabs>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={ <Redirect to="/client" /> }
+        />
+        <Route path="/client" component={Client} />
+        <Route path="/broker" component={Broker} />
+      </Switch>
+    </ThemeProvider>
   );
 }
 
