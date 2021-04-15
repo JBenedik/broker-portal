@@ -53,11 +53,12 @@ export default function Table({ referrals, tab }) {
   const handleOpen = rowData => {
     setModalData(rowData)
     setModalOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setModalOpen(false);
-  };
+  }
+
   return (
     <React.Fragment>
       <MaterialTable

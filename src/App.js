@@ -34,7 +34,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={ <Redirect to="/client" /> }
+          render={() => <Redirect to="/client" /> }
         />
         <Route path="/client" component={Client} />
         <Route path="/broker" component={Broker} />
